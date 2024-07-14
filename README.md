@@ -1,4 +1,4 @@
-Sure, let's start a ReactJS project with Firebase from scratch. Here’s a step-by-step guide:
+ let's start a ReactJS project with Firebase from scratch. Here’s a step-by-step guide:
 
 ### Step 1: Set Up a New React Project
 
@@ -7,8 +7,8 @@ Sure, let's start a ReactJS project with Firebase from scratch. Here’s a step-
 2. **Create a React App**:
    Open your terminal and run:
    ```bash
-   npx create-react-app my-firebase-app
-   cd my-firebase-app
+   npx create-react-app react_firebase
+   cd react_firebase
    ```
 
 ### Step 2: Set Up Firebase
@@ -149,61 +149,8 @@ Sure, let's start a ReactJS project with Firebase from scratch. Here’s a step-
    };
 
    export default Signup;
-   ```
 
-### Step 4: Set Up Firestore
-
-1. **Create Firestore Components**:
-   Create a `FirestoreExample.js` component to interact with Firestore:
-
-   ```javascript
-   // src/FirestoreExample.js
-
-   import React, { useEffect, useState } from 'react';
-   import { db } from './firebase';
-   import { collection, getDocs, addDoc } from 'firebase/firestore';
-
-   const FirestoreExample = () => {
-     const [items, setItems] = useState([]);
-     const [newItem, setNewItem] = useState('');
-
-     useEffect(() => {
-       const fetchItems = async () => {
-         const querySnapshot = await getDocs(collection(db, 'items'));
-         setItems(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-       };
-
-       fetchItems();
-     }, []);
-
-     const handleAddItem = async () => {
-       await addDoc(collection(db, 'items'), { name: newItem });
-       setNewItem('');
-     };
-
-     return (
-       <div>
-         <h2>Firestore Example</h2>
-         <input
-           type="text"
-           value={newItem}
-           onChange={(e) => setNewItem(e.target.value)}
-           placeholder="New Item"
-         />
-         <button onClick={handleAddItem}>Add Item</button>
-         <ul>
-           {items.map(item => (
-             <li key={item.id}>{item.name}</li>
-           ))}
-         </ul>
-       </div>
-     );
-   };
-
-   export default FirestoreExample;
-   ```
-
-### Step 5: Integrate Components into App
+### Step 4: Integrate Components into App
 
 1. **Modify `App.js`** to include your components:
 
@@ -213,7 +160,7 @@ Sure, let's start a ReactJS project with Firebase from scratch. Here’s a step-
    import React from 'react';
    import Login from './Login';
    import Signup from './Signup';
-   import FirestoreExample from './FirestoreExample';
+
 
    function App() {
      return (
